@@ -1,4 +1,3 @@
-import { resData } from "../utils/data";
 import { useEffect, useState } from "react";
 
 const ResturantCard = ({ resturant }) => {
