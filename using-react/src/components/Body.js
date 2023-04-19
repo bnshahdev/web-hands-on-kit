@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Shimmer } from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const ResturantCard = ({ resturant }) => {
   const { name, rating, image, title, cloudinaryImageId, avgRating } =
@@ -43,7 +45,9 @@ export const Body = () => {
     setFilteredListRes(result?.data?.cards[0].data?.data.cards);
   }
 
-  return (
+  return filteredListRes.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="search">
         <input
@@ -55,7 +59,9 @@ export const Body = () => {
 
       <div className="res-container">
         {filteredListRes.map((res) => (
-          <ResturantCard key={res.uuid} resturant={res} />
+          <Link to={"/resturant/" + res.data.id}>
+            <ResturantCard key={res.uuid} resturant={res} />
+          </Link>
         ))}
       </div>
     </div>
