@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
 
+function test() {
+  useEffect(() => {
+    console.log("Test...");
+  });
+}
+
 const ResturantCard = ({ resturant }) => {
   const { name, rating, image, title, cloudinaryImageId, avgRating } =
     resturant.data;
@@ -19,6 +25,7 @@ const ResturantCard = ({ resturant }) => {
 
 export const Body = () => {
   console.log("Body..");
+  const value = test();
 
   const [listRes, setListRes] = useState([]);
   const [filteredListRes, setFilteredListRes] = useState([]);
