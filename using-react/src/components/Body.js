@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
+import SearchContext from "../utils/SearchContext";
 
 function test() {
   useEffect(() => {
@@ -30,6 +31,7 @@ export const Body = () => {
   const [listRes, setListRes] = useState([]);
   const [filteredListRes, setFilteredListRes] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const { searchFor, setSearchFor } = useContext(SearchContext);
 
   useEffect(() => {
     getResList();
@@ -59,11 +61,15 @@ export const Body = () => {
       <div className="search">
         <input
           type="text"
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setSearchFor(e.target.value);
+          }}
           placeholder="Search"
         />
       </div>
 
+      <h2>Seach results for.. {searchFor}</h2>
       <div className="res-container">
         {filteredListRes.map((res) => (
           <Link to={"/resturant/" + res.data.id}>

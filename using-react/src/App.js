@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
 import "../index.css";
 import Header from "./components/Header";
@@ -7,13 +7,23 @@ import Footer from "./components/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import About from "./components/About";
 import { ResturantDetails } from "./components/ResturantDetails";
+import SearchContext from "./utils/SearchContext";
+import { useState } from "react";
 
 const AppLayout = () => {
+  const [searchFor, setSearchFor] = useState("");
   return (
     <div>
-      <Header />
-      <Outlet />
-      <Footer />
+      <SearchContext.Provider
+        value={{
+          searchFor,
+          setSearchFor,
+        }}
+      >
+        <Header />
+        <Outlet />
+        <Footer />
+      </SearchContext.Provider>
     </div>
   );
 };
