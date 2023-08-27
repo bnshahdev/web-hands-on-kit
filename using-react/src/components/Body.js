@@ -2,27 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
 import SearchContext from "../utils/SearchContext";
+import { addItem } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
+import ResturantCard from "./ResturantCard";
 
 function test() {
   useEffect(() => {
     console.log("Test...");
   });
 }
-
-const ResturantCard = ({ resturant }) => {
-  const { name, rating, image, title, cloudinaryImageId, avgRating } =
-    resturant.data;
-  const url =
-    "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
-    cloudinaryImageId;
-  return (
-    <div className="res-card">
-      <img className="res-image" src={url} />
-      <h3>{name}</h3>
-      {avgRating && <h4>{avgRating}</h4>}
-    </div>
-  );
-};
 
 export const Body = () => {
   console.log("Body..");
@@ -72,9 +60,9 @@ export const Body = () => {
       <h2>Seach results for.. {searchFor}</h2>
       <div className="res-container">
         {filteredListRes.map((res) => (
-          <Link to={"/resturant/" + res.data.id}>
-            <ResturantCard key={res.uuid} resturant={res} />
-          </Link>
+          // <Link to={"/resturant/" + res.data.id}>
+          <ResturantCard key={res.uuid} resturant={res} />
+          // </Link>
         ))}
       </div>
     </div>

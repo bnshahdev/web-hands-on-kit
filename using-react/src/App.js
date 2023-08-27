@@ -9,21 +9,26 @@ import About from "./components/About";
 import { ResturantDetails } from "./components/ResturantDetails";
 import SearchContext from "./utils/SearchContext";
 import { useState } from "react";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 
 const AppLayout = () => {
   const [searchFor, setSearchFor] = useState("");
   return (
     <div>
-      <SearchContext.Provider
-        value={{
-          searchFor,
-          setSearchFor,
-        }}
-      >
-        <Header />
-        <Outlet />
-        <Footer />
-      </SearchContext.Provider>
+      <Provider store={store}>
+        <SearchContext.Provider
+          value={{
+            searchFor,
+            setSearchFor,
+          }}
+        >
+          <Header />
+          <Outlet />
+          <Footer />
+        </SearchContext.Provider>
+      </Provider>
     </div>
   );
 };
@@ -45,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/resturant/:id",
         element: <ResturantDetails />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
